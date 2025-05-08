@@ -1,0 +1,5 @@
+"0","ggplot(only1, aes(area = starter, fill = pro_bowl, label = player)) + "
+"0","  geom_treemap() + "
+"0","  geom_treemap_text(color = ""black"", place = ""center"") + "
+"0","  scale_fill_gradient(low = ""steelblue"", high = ""orange"", name = ""# of Pro Bowls"") +"
+"0","  labs(title = ""Map of Round 1, pick 1 success, area is starts"")"

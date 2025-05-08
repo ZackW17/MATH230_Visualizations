@@ -1,0 +1,178 @@
+---
+title: "The Intricacies of Drafting in the NFL"
+description: |
+  An article about the difficulties and evolution of the NFL Draft. 
+author:
+  - name: Zack Weinstein 
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(ggplot2)
+library(readr)
+library(ggridges)
+library(plotly)
+library(ggbeeswarm)
+library(ggridges)
+library(treemapify)
+library(dplyr)
+nfl_draft_1970_2021 <- read_csv("nfl_draft_1970-2021.csv")
+```
+```{r}
+pitt.position = nfl_draft_1970_2021[nfl_draft_1970_2021$team == "PIT", ]
+
+for (b in 1:606) {
+if (pitt.draft$position[b] == "LS" | pitt.draft$position[b] == "DL" | pitt.draft$position[b] == "OL" | pitt.draft$position[b] == "S" | pitt.draft$position[b] == "P" | pitt.draft$position[b] == "OLB" | pitt.draft$position[b] == "K") {
+  pitt.position$position[b] = "Other" 
+}
+}
+
+pitt.position$position = factor(pitt.position$position, levels = c("QB", "DT", "DE", "LB", "C", "CB", "DB", "G", "NT", "RB", "T", "TE", "WR", "Other"))
+
+pitt.position.1900s = pitt.position[pitt.position$year < 2000, ]
+pitt.position.2000s = pitt.position[pitt.position$year >= 2000, ]
+```
+
+
+```{r}
+nfl_draft_1970_2021$position = factor(nfl_draft_1970_2021$position, levels = c("QB", "DT", "DE", "LB", "C", "CB", "DB", "DL", "FB", "G", "ILB", "K", "KR", "LS", "NT", "OL", "OLB", "OT", "P", "RB", "S", "T", "TE", "WB", "WR"))
+nfl_draft_1970_2021$team = factor(nfl_draft_1970_2021$team, levels = c("ARI", "ATL", "BAL", "BOS", "BUF", "CAR", "CHI", "CIN", "CLE", "DAL", "DEN", "DET", "GNB", "HOU", "IND", "JAX", "KAN", "LAC", "LAR", "LVR", "MIA", "MIN", "NOR", "NWE", "NYG", "NYJ", "OAK", "PHI", "PHO", "PIT", "RAI", "RAM", "SDG", "SEA", "SFO", "STL", "TAM", "TEN", "WAS"))
+```
+
+
+```{r}
+pitt.draft = nfl_draft_1970_2021[nfl_draft_1970_2021$team == "PIT", ]
+data.allpro = nfl_draft_1970_2021[nfl_draft_1970_2021$all_pro > 0, ]
+only1 = nfl_draft_1970_2021[nfl_draft_1970_2021$round == 1, ]
+only1 = only1[only1$pick == 1, ]
+
+yes.probowl = NULL
+for (b in 1:15773) {
+if (nfl_draft_1970_2021$pro_bowl[b] > 0) {
+  yes.probowl = c(yes.probowl, "Yes")
+} else {
+  yes.probowl = c(yes.probowl, "No")
+}
+}
+
+yes.probowl.pitt = NULL
+for (b in 1:606) {
+if (pitt.draft$pro_bowl[b] > 0) {
+  yes.probowl.pitt = c(yes.probowl.pitt, "Yes")
+} else {
+  yes.probowl.pitt = c(yes.probowl.pitt, "No")
+}
+}
+
+yes.probowl.only1 = NULL
+for (b in 1:52) {
+if (only1$pro_bowl[b] > 0) {
+  yes.probowl.only1 = c(yes.probowl.only1, "Yes")
+} else {
+  yes.probowl.only1 = c(yes.probowl.only1, "No")
+}
+}
+
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE}
+sum(yes.probowl == "Yes")/length(yes.probowl)
+
+1 - sum(yes.probowl == "Yes")/length(yes.probowl)
+```
+
+Has your team ever drafted a player that turned turned out terribly? Do you ever wonder about how hard it is to draft players in the NFL? Hopefully this article can answer some of those questions. \
+
+One of the main ways to categorize a player by how good of a player they are, are the amount of times they went to a pro bowl. The pro bowl is a conglomeration of the best players in the league for each year. To look at how often a player actually makes the pro bowl, we can take a look at the visualization below with data from 1970 to 2021:  
+
+```{r}
+x = c("Yes", "No")
+y= c(sum(yes.probowl == "Yes"), sum(yes.probowl == "No"))
+text = c("8.91% of all Draft Picks since 1970", "91.08% of all Draft Picks since 1970")
+fig <- plot_ly(x = ~x, y = ~y, type = 'bar',
+             text = text, textposition = 'auto',
+             marker = list(color = 'orange',
+                           line = list(color = 'steelblue', width = 1.5)))
+fig <- fig %>% layout(title = "# of Pro Bowlers from Draft",
+         xaxis = list(title = "In Pro Bowl"),
+         yaxis = list(title = "# of Players"))
+
+fig
+``` 
+Only 8.91% of all players drafted made it to the pro bowl, meaning less than a tenth of the players drafted have had at least one season of great success. Not really that high of a chance for a pick to turn out well. \
+However, the round and pick of the draft matters a lot, as typically the higher you are drafted, the higher the projection is for you to succeed. The graph below shows the proportion of pro bowlers in comparison with when they were picked. 
+
+
+```{r}
+ggplot(nfl_draft_1970_2021, aes(x = pick, fill = yes.probowl)) +
+  geom_histogram() +
+  labs(title = "# of Draft Picks and Proportion of Pro Bowls", x = "Pick Number", y = "# of Picks") +
+  theme_linedraw() +
+  scale_fill_manual(values = c("steelblue", "orange"), name = "In a Pro Bowl?")
+```
+As you can see from the graph, being a higher pick in the draft drastically increases your odds to be a better player. But, if players were perfectly prospected, then the proportion of players in the first couple picks should have almost the full majority of players that went to the pro bowl. \
+Even if you were the first pick of the draft, the odds that you would go to at least one pro bowl aren't quite as high as we feel like they should. Take this graph below that shows the first pick in about the last fifty drafts: 
+
+```{r}
+ggplot(only1, aes(area = starter, fill = pro_bowl, label = player)) + 
+  geom_treemap() + 
+  geom_treemap_text(color = "black", place = "center") + 
+  scale_fill_gradient(low = "steelblue", high = "orange", name = "# of Pro Bowls") +
+  labs(title = "Map of Round 1, pick 1 success, area is starts")
+```
+Some of these players are considered one of the greatest of all time, or on their way there to success, but a lot fo the players on there have not have crazy success. Personally, as a younger person who have not experienced many of the drafts of these players, I maybe know half of these players by name. \
+Drafting players isn't perfect, and being the first pick doesn't guarantee a player's greatness. \
+Looking further at the players picked first in every draft, there are some patterns that emerge when looking at the statistics:
+
+```{r}
+ggplot(only1, aes(x = position, fill = yes.probowl.only1)) +
+  geom_bar() +
+  labs(title = "Round 1, Pick 1 Success by Pro Bowls", x = "Position", y = "Amount Picked in Draft") +
+  theme_minimal() +
+  scale_fill_manual(values = c("orange", "steelblue"), name = "In a Pro Bowl?")
+```
+When looking at the picks by position, there are some positions that teams clearly value more than others. Quarterbacks are by far and away the most popular position to draft, with over 25, but about 75% have been to at least one pro bowl. Even less have had that much prolonged success and been able to elevate the team. \
+
+Simply put, the NFL draft is like a lottery, where the more you lose, the better your odds get. As good as your odds are, having the best draft picks, nothing is ever proven in the NFL, and this can cause some distress in fan bases. One might consider the New England Patriots lucky that they got the best steal of any NFl draft with Tom Brady, and the Raiders are extremely unlucky with players like JaMarcus Russell. In my opinion, I think this idea of a lottery applies so much more heavier today than before. \
+QB's are some of the most important and team defining players in the NFL. In today's times, teams are vicariously looking for their next franchise QB, and it shows with this next graph. 
+
+```{r}
+QB.sum = NULL
+
+for (b in 1970:2021) {
+QB.sum = c(QB.sum, sum(round1.nfl$position[round1.nfl$year == b] == "QB"))
+}
+years = 1970:1:2021
+
+ggplot() +
+  geom_point(aes(x = years, y = QB.sum)) +
+  geom_smooth(aes(x = years, y = QB.sum), method = "lm", col = "steelblue") +
+  theme_bw() +
+  labs(x = "Years", y = "# of QB's Drafted", title = "QB Trends over the Last Fifty Years") +
+  theme(panel.background = element_rect(fill = 'orange'))
+```
+The number of QB's taken in the first round has increased a lot in the past few years, whtehr for better or worse. Teams are going big or going home, much like people buying scratchers or lottery tickets in hope of winning the big jackpot. In the 2024 draft of the NFL, six QB's were taken in the first round. An insane statistic, and one that shows how the game and draft is evolving. \
+
+The game is evolving, and I can see my own team changing as time goes as well. I am a big fan of the Pittsburgh Steelers, one team where I think most people would agree is fairly old fashioned. However, they have changed as well and can be seen with the pie charts of Steelers draft picks from 1970-1999 and the 2000s. 
+
+```{r}
+fig <- plot_ly()
+fig <- fig %>% add_pie(data = count(pitt.position.1900s, position), labels = ~position, values = ~n,
+          name = "1970-1999", domain = list(x = c(0, 0.4), y = c(0.4, 1)))
+fig <- fig %>% add_pie(data = count(pitt.position.2000s, position), labels = ~position, values = ~n,
+          name = "2000s", domain = list(x = c(0.3, 1), y = c(0.4, 1)))
+fig <- fig %>% layout(title = "Pie Charts of Different Eras of Steelers Drafts", showlegend = F,
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+fig
+```
+Positions like LB and DB have dropped around 4 and 5% over the years, and other positions have been drafted more. I think this graph just tells the story of how even the most classic organizations have been trying to change to try and adapt to how the NFL works. \
+
+Teams have advanced groups of people analyzing and prospecting athletes before they go into the draft. But looking at the data, there is no surefire way to predict a player's success, only marginally improving the odds by ways like pick position. So the next time you watch the draft and remark on how well the organization made their decision, remember the only real way to know if they're a success is to see them play. 

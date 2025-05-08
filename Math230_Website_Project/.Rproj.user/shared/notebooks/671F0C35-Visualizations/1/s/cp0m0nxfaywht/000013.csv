@@ -1,0 +1,8 @@
+"0","ggplot(plates, aes(x = meal.duration, y = g.consumed, color = servings)) + "
+"0","  geom_point() +"
+"0","  theme_classic() +"
+"0","scale_color_manual(values = wes_palette(""Moonrise2"")) + "
+"0","  xlab(""Meal Duration"") + "
+"0","  ylab(""Grams of Food Consumed"") + "
+"0","  labs(color = ""Number of Servings"") +"
+"0","  ggtitle(""Scatterplot of Meal Duration and \n Grams of Food Consumed Categorized by Serving Size"")"

@@ -1,0 +1,5 @@
+"0","ggplot(nfl_draft_1970_2021, aes(x = pick, fill = yes.probowl)) +"
+"0","  geom_histogram() +"
+"0","  labs(title = ""# of Draft Picks and Proportion of Pro Bowls"", x = ""Pick Number"", y = ""# of Picks"") +"
+"0","  theme_linedraw() +"
+"0","  scale_fill_manual(values = c(""steelblue"", ""orange""), name = ""In a Pro Bowl?"")"

@@ -1,0 +1,17 @@
+---
+title: "Welcome!"
+description: "Welcome to the website. I hope you enjoy it!"
+site: distill::distill_website
+output:
+  postcards::jolla
+---  
+
+Zack Weinstein
+I am a current sophomore at Bucknell University and majoring in Mechanical Engineering. I have made many visualizations, particularly with my MATH 230 class, and would love to share some of my past projects and experiences with you.   
+![caption](Bucknell_logo.png) \
+The Visualizations page takes you to some of my past visualizations I have made that I'm particularly fond of. The NFL Draft page takes you to an article I wrote about the intricacies of the NFL Draft and includes graphs and images that I created in order to describe a story. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```

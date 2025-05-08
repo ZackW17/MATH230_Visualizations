@@ -1,0 +1,52 @@
+"0","library(ggplot2)"
+"2","Keep up to date with changes at https://tidyverse.org/blog/
+"
+"0","library(readr)"
+"0","library(ggridges)"
+"0","library(plotly)"
+"2","
+Attaching package: ‘plotly’
+
+"
+"2","The following object is masked from ‘package:ggplot2’:
+
+    last_plot
+
+"
+"2","The following object is masked from ‘package:stats’:
+
+    filter
+
+"
+"2","The following object is masked from ‘package:graphics’:
+
+    layout
+
+"
+"0","library(ggbeeswarm)"
+"0","library(ggridges)"
+"0","library(treemapify)"
+"0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","nfl_draft_1970_2021 <- read_csv(""nfl_draft_1970-2021.csv"")"
+"2","[1mRows: [22m[34m15773[39m [1mColumns: [22m[34m29[39m"
+"2","[36m──[39m [1mColumn specification[22m [36m───────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m  (4): team, player, position, college
+[32mdbl[39m (25): year, round, pick, age, to, all_pro, pro_bowl, starter, carAV, drAV, games, pass_comp..."
+"2","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message."

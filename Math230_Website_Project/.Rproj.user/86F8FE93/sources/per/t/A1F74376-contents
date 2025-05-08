@@ -1,0 +1,100 @@
+---
+title: "Past Visualizations"
+description: |
+  A sample of Visualizations I have made in the past.
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## The following pictures are AI created artwork tailored by myself using tools in R Markdown. 
+
+![caption](Lady_In_The_Smoke.png) 
+*Lady in The Smoke*
+
+![caption](Flash_Fire.png)
+*Flash Fire*
+
+![caption](Bucknell_Stripes.png)
+*Bucknell Stripes*
+
+----------------------------------------------
+
+# Confidence Levels Dashboard  
+Authors: Zack Weinstein, Will Lindquist, Andrew Bond\ 
+
+*The following is a dashboard that me, and my partners, Will Lindquist, and Andrew Bond had created. This dashboard was created to help intro statistics students learn about confidence levels and intervals. All the data in the dashboard can be manipulated, and many of the graphs created were made using ggplot in posit. The dashboard is very interactive, and shows how confidence levels can be helpful when using two different types of data.*
+<iframe src=" https://abby-flynt.shinyapps.io/ConfidenceLevels_Dashboard_Team5/" class="l-screen-inset shaded" height="1000px">
+</iframe>
+
+-----------------------------------------------
+
+## Postcard Project
+\
+One of the first projects I had in MATH 230 was to make a postcard detailing a bunch of different data on a subject of my choice. I chose to study and log my eating habits for a week, and then made a visualization based on the data I collected. I decided to separate the visualization for each day I ate, because I wanted to make it prevalent which meals I was eating, and at which times. I added extra data to the visualzation for more information, like for instance, a house symbol indicates that I ate in my dorm, while a bison head indicted that I ate in the Bucknell cafe, called the Bison. The making of the postcard helped me realize important things about my eating habits as well as getting my first introduction into making well-designed visualizations. 
+  The first picture shown below is the representation of data, and the second picture is a key of what each symbol means. 
+
+![caption](Postcard_Front.jpg)
+*Front of Postcard*
+![caption](Postcard_Key.jpg)
+*Back of Postcard*  
+
+-----------------------------------------------
+
+```{r, echo = FALSE}
+library(ggplot2)
+library(ggdensity)
+data("iris")
+iris = iris[complete.cases(iris), ]
+
+attach(iris)
+```
+
+## GGplot Extensions
+
+This next visualization is one myself, Dawson Hastings, and Jean Marie Ngabonziza made using ggplot to demonstrate some one of the ggplot extensions in ggdensity. Here, we used the extension to compare the sepal length and petal lengths for iris's and how they differ for each species. The data set used was named "iris" and is a built in data set in r. This was another visualization that 
+
+```{r}
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Length, fill = Species)) +
+  geom_hdr() +
+  geom_point(shape = 21) +
+  facet_wrap(vars(Species)) +
+  scale_fill_brewer(palette = "Dark2")
+
+detach(iris)
+```
+
+-----------------------------------------------
+## Multivariable Visualization on Plate Sizes
+
+This visualization is one that I created using a data set about a certain study, where scientists tested whether plate size affects the amount of food people eat. In this sample visualization, I wanted to make a plot that could explain if meal duration affects the participants grams of food consumed, while also looking at the number of servings. As the independent variable, I used the meal duration, and the dependent variable of grams consumed. I decided to use a scatterplot to represent this data, and filed each point with how many servings each participant had. By looking at the graph, it should help explain whether 
+
+```{r}
+load("plate.sizes.RData")
+library(ggplot2)
+library(wesanderson)
+```
+
+```{r, echo = FALSE}
+plates$servings = factor(plates$servings, levels = 1:4, ordered = TRUE)
+```
+```{r}
+attach(plates)
+```
+
+```{r}
+ggplot(plates, aes(x = meal.duration, y = g.consumed, color = servings)) + 
+  geom_point() +
+  theme_classic() +
+scale_color_manual(values = wes_palette("Moonrise2")) + 
+  xlab("Meal Duration") + 
+  ylab("Grams of Food Consumed") + 
+  labs(color = "Number of Servings") +
+  ggtitle("Scatterplot of Meal Duration and \n Grams of Food Consumed Categorized by Serving Size")
+
+detach(plates)
+```
+

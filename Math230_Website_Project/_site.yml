@@ -1,0 +1,15 @@
+name: "Math230_Website_Project"
+title: "My Personal Visualizations"
+description: |
+  Welcome!
+output_dir: "docs"
+theme: dataviz_theme.css
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "NFL Draft"
+      href: NFL_Draft.html
+    - text: "Visualizations"
+      href: Visualizations.html
+output: distill::distill_article

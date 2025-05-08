@@ -1,0 +1,22 @@
+"0","plates$plate.size = factor(plates$plate.size, levels = 0:1, labels = c(""small"","
+"0","                                                         ""large""), ordered = TRUE)"
+"0","plates$servings = factor(plates$servings, levels = 1:4, ordered = TRUE)"
+"0","plates$gender = factor(plates$gender, labels = c(""male"", ""female"", ""other""))"
+"0","plates$ethnicity = factor(plates$ethnicity, labels = c(""White"", ""Mixed"", ""Asian"", ""Black"",                                                   ""Other""))"
+"0","plates$ethnicity.dicot = factor(plates$ethnicity.dicot, labels = c(""White"", ""Non-white""))"
+"0","plates$fasting = factor(plates$fasting, levels = c(""yes"", ""no""))"
+"0",""
+"0","attach(plates)"
+"2","The following objects are masked from plates (pos = 4):
+
+    age, BIS.Q1, BIS.Q10, BIS.Q11, BIS.Q12, BIS.Q13, BIS.Q14, BIS.Q15,
+    BIS.Q16, BIS.Q17, BIS.Q18, BIS.Q19, BIS.Q2, BIS.Q20, BIS.Q21, BIS.Q22,
+    BIS.Q23, BIS.Q24, BIS.Q25, BIS.Q26, BIS.Q27, BIS.Q28, BIS.Q29, BIS.Q3,
+    BIS.Q30, BIS.Q4, BIS.Q5, BIS.Q6, BIS.Q7, BIS.Q8, BIS.Q9, BIS.TOTAL,
+    bite.rate, bite.size, BMI, Date, eat.rate, ethnicity, ethnicity.dicot,
+    fasting, fullness, g.consumed, g.remaining, g.served, gender,
+    highest.qual, highest.qual.split, hunger, ID, imd, imd.med.split,
+    income, income.med.split, kcal.consumed, like.food, line.task.correct,
+    meal.duration, n.bites, plate.size, servings, ssrt
+
+"
