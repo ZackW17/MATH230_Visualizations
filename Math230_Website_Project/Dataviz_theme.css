@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 /* base variables */
 
 /* Edit the CSS properties in this file to create a custom
@@ -28,9 +26,9 @@ html {
   --aside-color:     #023047;
   --fig-cap-color:   #023047;
   /*-- Specify custom fonts ~~~ must be imported above   --*/
-  --heading-font:    "Fjalla One"";
+  --heading-font:    sans-serif;
   --mono-font:       monospace;
-  --body-font:       "Playfair Display";
+  --body-font:       sans-serif;
   --navbar-font:     sans-serif;  /* websites + blogs only */
 }
 
