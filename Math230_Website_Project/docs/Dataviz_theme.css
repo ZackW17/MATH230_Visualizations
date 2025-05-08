@@ -28,7 +28,7 @@ html {
   --aside-color:     #023047;
   --fig-cap-color:   #023047;
   /*-- Specify custom fonts ~~~ must be imported above   --*/
-  --heading-font:    "Fjalla One"";
+  --heading-font:    "Fjalla One";
   --mono-font:       monospace;
   --body-font:       "Playfair Display";
   --navbar-font:     sans-serif;  /* websites + blogs only */
